@@ -5,6 +5,7 @@ using UnityEditor;
 
 public class Food : MonoBehaviour
 {
+    public GameManager gameManager;
     public Tail tailScript; 
     GameObject food;
     public Transform snake; 
@@ -30,6 +31,7 @@ public class Food : MonoBehaviour
         {
             FoodMove();
             tailScript.AddTail();
+            gameManager.score++;
           // snakeScript.TailMovement(); 
         }
     }

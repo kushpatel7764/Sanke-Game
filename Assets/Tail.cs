@@ -49,4 +49,13 @@ public class Tail : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //print(collision.tag);
+        if (collision.gameObject.tag == "Player")
+        {
+           // print("Game Over");
+        }
+    }
+
 }
