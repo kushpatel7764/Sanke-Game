@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public Text scoreText; 
+    public Text highScoreText;
     public int score = 0; 
     public GameObject borderLeft;
     public GameObject borderRight;
@@ -18,13 +19,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         screen = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 1));
-        BoundryCreation(); 
+        BoundryCreation();
     }
 
     // Update is called once per frame
     void Update()
     {
         Score();
+        HighScore();
     }
     void BoundryCreation()
     {
@@ -44,10 +46,33 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0) ;
     }
-
+    public void Quit()
+    {
+        Application.Quit();
+    }
     void Score()
     {
         scoreText.text = "" + score; 
+    }
+    void HighScore()
+    {
+        highScoreText.text = "" + PlayerPrefs.GetInt("HighScore");
+    }
+    
+    public void SetHighScore()
+    {
+        if (PlayerPrefs.GetInt("HighScore") < score)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+        }
+        else
+        {
+            return; 
+        }
+    }
+    public void GetHighScore()
+    {
+        PlayerPrefs.GetInt("HighScore");
     }
     
 
