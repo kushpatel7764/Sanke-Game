@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Text scoreText; 
+    public Text scoreText;
+    public Text scoreTextSetup;
     public Text highScoreText;
+    public Text highScoreTextSetup;
     public int score = 0; 
     public GameObject borderLeft;
     public GameObject borderRight;
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
     {
         Score();
         HighScore();
+        OpenMenu();
     }
     void BoundryCreation()
     {
@@ -35,16 +38,20 @@ public class GameManager : MonoBehaviour
         borderUp.transform.localPosition = new Vector2(0, screen.y+0.3f);
         borderDown.transform.localPosition = new Vector2(0, -screen.y-0.3f);
 
+        scoreTextSetup.transform.position = new Vector2(screen.x + 50f, screen.y + 475f);
+        highScoreTextSetup.transform.position = new Vector2(screen.x + 75f, screen.y + 440f);
 
         borderLeft.transform.localScale = new Vector2(0.5f, screen.y*2);
         borderRight.transform.localScale = new Vector2(0.5f, screen.y*2);
         borderUp.transform.localScale = new Vector2(screen.x*2, 0.5f);
         borderDown.transform.localScale = new Vector2(screen.x*2, 0.5f);
+
+
     }
 
     public void ResetLevel()
     {
-        SceneManager.LoadScene(0) ;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name) ;
     }
     public void Quit()
     {
@@ -74,7 +81,14 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.GetInt("HighScore");
     }
-    
+    void OpenMenu()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SetHighScore();
+            SceneManager.LoadScene(0);
+        }
+    }
 
     
 }
